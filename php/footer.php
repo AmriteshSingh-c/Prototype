@@ -1,4 +1,4 @@
-<footer id="footer" class="footer">
+<footer id="footer" class="footer" style="position:relative;bottom:0px;z-index:100;">
 
 
 
