@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Andada+Pro:ital@1&display=swap" rel="stylesheet">
     <!-- Favicons -->
-    <link href="img/logo.png" rel="icon">
+    <!-- <link href="img/logo.png" rel="icon"> -->
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,12 +45,12 @@
 
     <?php
 
-    include 'php/header.php'
+    include 'components/header.php'
 
     ?>
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24">
-            <div class="flex flex-wrap -m-4">
+            <div class="flex flex-row -m-4" style="align-items:center;">
                 <div class="p-4 md:w-1/3">
                     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
                         <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="assets/img/login/login-2.jpg" alt="blog">
@@ -90,22 +90,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-4 md:w-1/3 bg-gray-700" style="font-family: 'Andada Pro', serif; color:#d1b8c6">
-                    <ol list-style:upper-roman>
-                        <li>Placement is a decisive factor of successful completion of any coursework at the graduate or postgraduate level.</li>
-                        <br>
-                        <li>It is a dream of every student to get placed in top MNCs to achieve their set goals and objectives.</li>
-                        <br>
-                        <li> The private universities are also levelling up their game by equipping and upgrading their training and placement cells.</li>
-                        <br>
-                        <li> Contrary to popular belief, the role of the placement cell is not limited to organisingrecruitment drive at the campus.</li>
-                        <br>
-                        <li> They play a much broader role in placing a student in a reputed organisation. Let’s find out how!</li>
-                        <br>
-                        <li style="text-align:right">- Training and Placement Officer</li>
-
-                    </ol>
-                </div>
+                
             </div>
 
         </div>
@@ -117,7 +102,7 @@
 
 
     <?php
-    include 'php/footer.php'
+    include 'components/footer.php'
     ?>
 </body>
 

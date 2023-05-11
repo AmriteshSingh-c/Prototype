@@ -1,19 +1,18 @@
 <?php // opening php tags
 
-session_start()
+session_start();
 // adding database file
-require_once(Placement_portal.php);
+require_once("Placement_portal.php");
 
 $sql = "select * from users";
 
-$result = $conn -> query($sql)
+$result = $conn->query($sql);
 
-if ($result->num_rows>0)
-{
-while ($result->fetch_assoc()){
+if ($result->num_rows > 0) {
+ while ($result->fetch_assoc()) {
 
-echo "echo $row['Name'];
-}
+  echo $row['Name'];
+ }
 
 
 }

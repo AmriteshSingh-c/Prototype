@@ -21,34 +21,39 @@ if (isset($_GET)) {
 
     if ($result1->num_rows > 0) {
         $row1 = $result1->fetch_assoc();
-        $sum = $row1['hsc'] + $row1['ssc'] + $row1['ug'] + $row1['pg'];
-        $total = ($sum / 4);
-        $course1 = $row1['qualification'];
+        // $sum = $row1['hsc'] + $row1['ssc'] + $row1['ug'] + $row1['pg'];
+        // $total = ($sum / 4);
+        // $course1 = $row1['qualification'];
+        $hsc = $row1['hsc'];
+        $ssc = $row1['ssc'];
+        $ug = $row1['ug'];
     }
 
 
-    $sql = "SELECT maximumsalary, qualification FROM job_post WHERE id_jobpost='$_GET[id]'";
+    $sql = "SELECT ssc_eligibility, hsc_eligibility,ug_eligibility FROM job_post WHERE id_jobpost='$_GET[id]'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $eligibility = $row['maximumsalary'];
-        $course2 = $row['qualification'];
-        if ($total >= $eligibility) {
-            if ($course1 == $course2) {
-                header("Location: ../view-job-post.php?id=$_GET[id]");
-                $_SESSION['status'] = "You are eligible for this drive, apply if you are interested.";
-                $_SESSION['status_code'] = "success";
-                exit();
-            } else {
-                header("Location: ../view-job-post.php?id=$_GET[id]");
-                $_SESSION['status'] = "You are not eligible for this drive due to the course criteria. Check out other drives.";
-                $_SESSION['status_code'] = "success";
-                exit();
-            }
+        $ssc_eligibility = $row['ssc_eligibility'];
+        $hsc_eligibility = $row['hsc_eligibility'];
+        $ug_eligibility = $row['ug_eligibility'];
+        if ($ssc >= $ssc_eligibility && $hsc >= $hsc_eligibility && $ug >= $ug_eligibility) {
+
+            header("Location: ../view-job-post.php?id=$_GET[id]");
+            $_SESSION['status'] = "You are eligible for this drive, apply if you are interested.";
+            $_SESSION['status_code'] = "success";
+            exit();
+            //add course criteria
+
+            // header("Location: ../view-job-post.php?id=$_GET[id]");
+            // $_SESSION['status'] = "You are not eligible for this drive due to the course criteria. Check out other drives.";
+            // $_SESSION['status_code'] = "success";
+            // exit();
+
         } else {
             header("Location: ../view-job-post.php?id=$_GET[id]");
-            $_SESSION['status'] = "You are not eligible for this drive either due to the overall percentage criteria or course criteria. Update your marks in your profile, if you think you are eligible.";
+            $_SESSION['status'] = "You are not eligible for this drive either due to the  percentage criteria .";
             $_SESSION['status_code'] = "success";
         }
     }

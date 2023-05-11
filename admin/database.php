@@ -38,7 +38,8 @@ require_once("../db.php");
 
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -58,33 +59,87 @@ require_once("../db.php");
                     <div class="row">
 
                         <div class="col md-13">
-                            <a href="export.php"><button type="submit1" name='export_excel_btn' class="btn btn-primary">Export to Excel</button></a>
+                            <a href="export.php"><button type="submit1" name='export_excel_btn'
+                                    class="btn btn-primary">Export to Excel</button></a>
 
-                            <button type="submit1" onclick="sortTable()" name='export_excel_btn' style="margin-left: 8px;" class="btn btn-success">Sort Data</button>
+                            <button type="submit1" onclick="sortTable()" name='export_excel_btn'
+                                style="margin-left: 8px;" class="btn btn-success">Sort Data</button>
                             <h3 style="text-align: center;"> Student applications for various companies</h3>
                             <?php
 
-                            $sql1 = "SELECT distinct jobtitle FROM job_post INNER JOIN apply_job_post ON job_post.id_jobpost=apply_job_post.id_jobpost  INNER JOIN users ON users.id_user=apply_job_post.id_user WHERE apply_job_post.id_company=2";
+                            $sql1 = "SELECT distinct companyname FROM job_post INNER JOIN apply_job_post ON job_post.id_jobpost=apply_job_post.id_jobpost  INNER JOIN users ON users.id_user=apply_job_post.id_user WHERE apply_job_post.id_jobpost=job_post.id_jobpost";
+                            $distinct_passing_year = "SELECT distinct passingyear FROM users";
+                            $result_passing_year = $conn->query($distinct_passing_year);
 
                             $result1 = $conn->query($sql1);
+
                             ?>
                             <form method="POST">
                                 <div class="form-group text-center option">
                                     <!-- <label>Select Company </label> -->
-                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%" tabindex="-1" aria-hidden="true" class="input" name="company">
+
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%"
+                                        tabindex="-1" aria-hidden="true" class="input" name="company">
                                         <option value="" selected>Select Company</option>
                                         <?php
                                         if ($result1->num_rows > 0) {
                                             while ($row1 = $result1->fetch_assoc()) {
 
 
-                                        ?>
-                                                <option class="option1" name="option1" id="option1" value="<?php echo $row1['jobtitle']; ?>"><?php echo $row1['jobtitle']; ?></option>
-                                        <?php
+                                                ?>
+                                                <option class="option1" name="option1" id="option1"
+                                                    value="<?php echo $row1['companyname']; ?>" <?php if (isset($_POST['company']) && $_POST['company'] == $row1['companyname'])
+                                                           echo "selected='selected'" ?>><?php echo $row1['companyname']; ?></option>
+                                                <?php
                                             }
                                         }
                                         ?>
                                     </select>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%"
+                                        tabindex="-1" aria-hidden="true" class="input" name="gender">
+                                        <option value="" selected>Select Gender</option>
+                                        <option class="option1" name="option1" id="option1" value="Male" <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Male')
+                                            echo "selected='selected'" ?>>Male</option>
+                                            <option class="option1" name="option1" id="option1" value="Female" <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Female')
+                                            echo "selected='selected'" ?>>Female
+                                            </option>
+                                        </select>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%"
+                                            tabindex="-1" aria-hidden="true" class="input" name="stream">
+                                            <option value="" selected>Select Stream</option>
+                                            <option class="option1" name="option1" id="option1" value="CE" <?php if (isset($_POST['stream']) && $_POST['stream'] == 'CE')
+                                            echo "selected='selected'" ?>>CE</option>
+                                            <option class="option1" name="option1" id="option1" value="ME" <?php if (isset($_POST['stream']) && $_POST['stream'] == 'E')
+                                            echo "selected='selected'" ?>>ME
+                                            </option>
+                                            <option class="option1" name="option1" id="option1" value="CSE" <?php if (isset($_POST['stream']) && $_POST['stream'] == 'CSE')
+                                            echo "selected='selected'" ?>>CSE
+                                            </option>
+                                            <option class="option1" name="option1" id="option1" value="ECE" <?php if (isset($_POST['stream']) && $_POST['stream'] == 'ECE')
+                                            echo "selected='selected'" ?>>ECE
+                                            </option>
+                                            <option class="option1" name="option1" id="option1" value="EE" <?php if (isset($_POST['stream']) && $_POST['stream'] == 'EE')
+                                            echo "selected='selected'" ?>>EE
+                                            </option>
+                                        </select>
+                                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%"
+                                            tabindex="-1" aria-hidden="true" class="input" name="passingyear">
+                                            <option value="" selected>Select Passing Year</option>
+                                            <?php
+                                        if ($result_passing_year->num_rows > 0) {
+                                            while ($row_year = $result_passing_year->fetch_assoc()) {
+
+
+                                                ?>
+                                                <option class="option1" name="option1" id="option1"
+                                                    value="<?php echo $row_year['passingyear']; ?>" <?php if (isset($_POST['passingyear']) && $_POST['passingyear'] == $row_year['passingyear'])
+                                                           echo "selected='selected'" ?>><?php echo $row_year['passingyear']; ?></option>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
+
                                     <input name="submit" type="submit" value="Submit">
                                     <form method="POST" action=""></form>
 
@@ -100,11 +155,14 @@ require_once("../db.php");
                             if (isset($_POST['submit'])) {
 
 
-                                $option = mysqli_real_escape_string($conn, $_POST['company']);
+                                $company_option = mysqli_real_escape_string($conn, $_POST['company']);
 
-                                // echo $_SESSION['option'];
 
-                            ?>
+
+
+
+
+                                ?>
                                 <!-- <h3>Drive Applications</h3> -->
                                 <div class="row margin-top-20">
                                     <div class="col-md-13">
@@ -112,24 +170,23 @@ require_once("../db.php");
                                             <table id="example2" class="table table-hover">
                                                 <thead>
                                                     <th>Student Name</th>
-                                                    <th>Highest Qualification</th>
-                                                    <th>Skills</th>
+                                                    <th>Gender</th>
+                                                    <th>Stream</th>
                                                     <th>City</th>
                                                     <th>State</th>
                                                     <th>Contact No.</th>
                                                     <th>Email</th>
-
                                                     <th>HSC</th>
                                                     <th>SSC</th>
                                                     <th>UG</th>
-                                                    <th>PG</th>
+                                                    <th>Passing Year</th>
 
                                                 </thead>
                                                 <tbody>
                                                     <?php
                                                     // selecting student record via option 
-
-                                                    $sql2 = "select id_jobpost from job_post where jobtitle = '$option'";
+                                                
+                                                    $sql2 = "select id_jobpost from job_post where companyname = '$company_option'";
                                                     $result2 = $conn->query($sql2);
 
                                                     if ($result2->num_rows > 0) {
@@ -138,42 +195,91 @@ require_once("../db.php");
 
 
 
-                                                            $sql = "select * from users inner join apply_job_post on users.id_user = apply_job_post.id_user where id_jobpost = '$jobid' ";
-                                                            $_SESSION['QUERY'] = $sql;
-                                                            $result = $conn->query($sql);
+                                                            $sql = "select * from users  ";
+                                                            $company_condition = "inner join apply_job_post on users.id_user = apply_job_post.id_user where id_jobpost = '$jobid'";
+                                                            $final_sql = $sql . $company_condition;
+                                                            if (isset($_POST['gender'])) {
+                                                                $gender_option = mysqli_real_escape_string($conn, $_POST['gender']);
+                                                                if ($gender_option != "") {
+                                                                    $gender_condition = " and users.gender='$gender_option'";
+                                                                    $final_sql = $final_sql . $gender_condition;
+                                                                }
+                                                            }
+                                                            if (isset($_POST['stream'])) {
+                                                                $stream_option = mysqli_real_escape_string($conn, $_POST['stream']);
+                                                                if ($stream_option != "") {
+                                                                    $stream_condition = " and users.stream='$stream_option'";
+                                                                    $final_sql = $final_sql . $stream_condition;
+                                                                }
+                                                            }
+                                                            if (isset($_POST['passingyear'])) {
+                                                                $passing_year_option = mysqli_real_escape_string($conn, $_POST['passingyear']);
+                                                                if ($passing_year_option != "") {
+                                                                    $passing_year_condition = " and users.passingyear='$passing_year_option'";
+                                                                    $final_sql = $final_sql . $passing_year_condition;
+                                                                }
+                                                            }
+
+                                                            $_SESSION['QUERY'] = $final_sql;
+                                                            $result = $conn->query($final_sql);
 
                                                             if ($result->num_rows > 0) {
 
                                                                 while ($row = $result->fetch_assoc()) {
 
-                                                                    $skills = $row['skills'];
-                                                                    $skills = explode(',', $skills);
-                                                    ?>
+                                                                    // $skills = $row['skills'];
+                                                                    // $skills = explode(',', $skills);
+                                                                    ?>
                                                                     <tr>
-                                                                        <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
-                                                                        <td><?php echo $row['qualification']; ?></td>
                                                                         <td>
+                                                                            <?php echo $row['firstname'] . ' ' . $row['lastname']; ?>
+                                                                        </td>
+
+                                                                        <!-- <td>
                                                                             <?php
                                                                             foreach ($skills as $value) {
                                                                                 echo ' <span class="label label-success">' . $value . '</span>';
                                                                             }
                                                                             ?>
+                                                                        </td> -->
+                                                                        <td>
+                                                                            <?php echo $row['gender']; ?>
                                                                         </td>
-                                                                        <td><?php echo $row['city']; ?></td>
-                                                                        <td><?php echo $row['state']; ?></td>
-                                                                        <td><?php echo $row['contactno']; ?></td>
-                                                                        <td><?php echo $row['email']; ?></td>
+                                                                        <td>
+                                                                            <?php echo $row['stream']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['city']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['state']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['contactno']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['email']; ?>
+                                                                        </td>
 
-                                                                        <td><?php echo $row['hsc']; ?></td>
-                                                                        <td><?php echo $row['ssc']; ?></td>
-                                                                        <td><?php echo $row['ug']; ?></td>
-                                                                        <td><?php echo $row['pg']; ?></td>
+                                                                        <td>
+                                                                            <?php echo $row['hsc']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['ssc']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['ug']; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <?php echo $row['passingyear']; ?>
+                                                                        </td>
+
 
 
                                                                     </tr>
 
 
-                                                    <?php
+                                                                    <?php
 
                                                                 }
                                                             }
@@ -188,7 +294,7 @@ require_once("../db.php");
 
 
 
-                            <?php
+                                <?php
 
                             }
                             ?>
@@ -252,6 +358,7 @@ require_once("../db.php");
 <!-- script for sorting data  -->
 
 <script>
+
     function sortTable() {
         var table,
             rows,

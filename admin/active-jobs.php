@@ -39,7 +39,8 @@ require_once("../db.php");
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -68,7 +69,7 @@ require_once("../db.php");
                     <li class="active"><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Drives</a></li>
                     <li><a href="applications.php"><i class="fa fa-address-card-o"></i> Students Profile</a></li>
                     <!-- <li><a href="companies.php"><i class="fa fa-building"></i> Drives</a></li> -->
-                    <li><a href="companies.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
+                    <li><a href="coordinators.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
                 </div>
@@ -90,20 +91,26 @@ require_once("../db.php");
                       </thead>
                       <tbody>
                         <?php
-                        $sql = "SELECT job_post.*, company.companyname FROM job_post INNER JOIN company ON job_post.id_company=company.id_company";
+                        $sql = "SELECT * FROM job_post";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                           $i = 0;
                           while ($row = $result->fetch_assoc()) {
-                        ?>
+                            ?>
                             <tr>
-                              <td><?php echo $row['jobtitle']; ?></td>
+                              <td>
+                                <?php echo $row['companyname']; ?>
+                              </td>
 
-                              <td><?php echo date("d-M-Y", strtotime($row['createdat'])); ?></td>
-                              <td><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-address-card-o"></i></a></td>
-                              <td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i class="fa fa-trash"></i></a></td>
+                              <td>
+                                <?php echo date("d-M-Y", strtotime($row['createdat'])); ?>
+                              </td>
+                              <td><a href="view-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i
+                                    class="fa fa-address-card-o"></i></a></td>
+                              <td><a href="delete-job-post.php?id=<?php echo $row['id_jobpost']; ?>"><i
+                                    class="fa fa-trash"></i></a></td>
                             </tr>
-                        <?php
+                            <?php
 
                             // $_SESSION['id_jobpost'] = $row['id_jobpost'];
                           }
@@ -188,7 +195,7 @@ require_once("../db.php");
   <script src="../js/adminlte.min.js"></script>
 
   <script>
-    $(function() {
+    $(function () {
       $('#example2').DataTable({
         'paging': true,
         'lengthChange': false,

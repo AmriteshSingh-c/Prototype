@@ -14,30 +14,35 @@ require_once("db.php");
 <head>
     <?php
 
-    include 'php/head.php'
+    include 'components/head.php'
 
     ?>
 
 
 </head>
+<style>
+    section{
+        padding:0px;
+    }
+    </style>
 
 <body>
 
     <!-- header starts -->
     <?php
 
-    include 'php/header.php'
+    include 'components/header.php'
 
     ?>
     <!-- header ends -->
 
     <section id="hero-animated" class="hero-animated d-flex align-items-center">
         <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative" data-aos="zoom-out">
-            <img src="assets/img/hero-carousel/hero-carousel-1.svg" class="img-fluid animated">
-            <h2>Welcome to <span>Placement Cell</span></h2>
-            <p>We Will Support You In Your Entire Placement Journey.</p>
-            <div class="d-flex">
-                <a href="login.php" class="btn-get-started scrollto">Get Started</a>
+            <img src="assets/img/homescreen.jpg" class="img-fluid animated">
+            <h2>Welcome to NIT Arunachal Pradesh <br><span style="color:green;">Training and Placement Cell</span></h2>
+            <p>Welcome to our Training and Placement Website.</p>
+            <div class="d-flex" style="background-color:black;border-radius:17%;">
+                <a href="student-register.php" class="scrollto" style="color:white;padding:5px;" >Get Started</a>
 
             </div>
         </div>
@@ -83,7 +88,7 @@ require_once("db.php");
             </div>
         </div><!-- End Service Item -->
 
-        </div>
+        <!-- </div>
 
         </div>
         </section><!-- End Featured Services Section -->
@@ -92,7 +97,7 @@ require_once("db.php");
 
 
         <!-- ======= Call To Action Section ======= -->
-        <section id="cta" class="cta">
+        <!-- <section id="cta" class="cta">
             <div class="container" data-aos="zoom-out">
 
                 <div class="row g-5">
@@ -118,12 +123,16 @@ require_once("db.php");
                 </div>
 
             </div>
-        </section><!-- End Call To Action Section -->
+        </section>End Call To Action Section --> 
 
-
+    <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
         <!-- ======= Clients Section ======= -->
-        <section id="clients" class="clients">
-            <div class="container" data-aos="zoom-out">
+        <section id="clients" class="clients" style="margin-top:25px;" >
+            <div class="text-center">
+            <h2 style="font-size:45px;color:rgb(100, 99, 99);"><span>Our Recruiters<span></h2>
+        </div>
+
+            <div class="container" data-aos="zoom-out" style="height:50px;">
 
                 <div class="clients-slider swiper">
                     <div class="swiper-wrapper align-items-center">
@@ -144,7 +153,7 @@ require_once("db.php");
 
 
         <!-- ======= Features Section ======= -->
-        <section id="objectives" class="features" name="objectives">
+        <!-- <section id="objectives" class="features" name="objectives">
             <div class="container" data-aos="fade-up">
 
 
@@ -174,14 +183,14 @@ require_once("db.php");
                                 <img src="assets/img/features-1.svg" alt="" class="img-fluid">
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- End Tab Content -->
 
 
 
 
 
-                    <section id="statistics" class="content-header">
+                    <!-- <section id="statistics" class="content-header text-center items-center">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 text-center latest-job margin-bottom-20">
@@ -189,9 +198,9 @@ require_once("db.php");
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-3 col-xs-6">
+                                <div class="col-lg-3 col-xs-6"> -->
                                     <!-- small box -->
-                                    <div class="small-box bg-aqua">
+                                    <!-- <div class="small-box bg-aqua">
                                         <div class="inner">
                                             <?php
                                             $sql = "SELECT * FROM job_post";
@@ -212,11 +221,11 @@ require_once("db.php");
                                             <i class="ion ion-ios-paper"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- ./col -->
-                                <div class="col-lg-3 col-xs-6">
+                                <!-- <div class="col-lg-3 col-xs-6"> -->
                                     <!-- small box -->
-                                    <div class="small-box bg-green">
+                                    <!-- <div class="small-box bg-green">
                                         <div class="inner">
                                             <?php
                                             $sql = "SELECT * FROM company WHERE active='1'";
@@ -237,11 +246,11 @@ require_once("db.php");
                                             <i class="ion ion-briefcase"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- ./col -->
-                                <div class="col-lg-3 col-xs-6">
+                                <!-- <div class="col-lg-3 col-xs-6"> -->
                                     <!-- small box -->
-                                    <div class="small-box bg-yellow">
+                                    <!-- <div class="small-box bg-yellow">
                                         <div class="inner">
                                             <?php
                                             $sql = "SELECT * FROM users WHERE resume!=''";
@@ -262,11 +271,11 @@ require_once("db.php");
                                             <i class="ion ion-ios-list"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- ./col -->
-                                <div class="col-lg-3 col-xs-6">
+                                <!-- <div class="col-lg-3 col-xs-6"> -->
                                     <!-- small box -->
-                                    <div class="small-box bg-red">
+                                    <!-- <div class="small-box bg-red">
                                         <div class="inner">
                                             <?php
                                             $sql = "SELECT * FROM users WHERE active='1'";
@@ -287,11 +296,11 @@ require_once("db.php");
                                             <i class="ion ion-person-stalker"></i>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- ./col -->
-                            </div>
+                            <!-- </div>
                         </div>
-                    </section>
+                    </section> -->
                     <!-- ======= F.A.Q Section ======= -->
 
 
@@ -299,10 +308,7 @@ require_once("db.php");
 
     <!-- ======= Footer ======= -->
 
-    <?php
-
-    include 'php/footer.php';
-    ?>
+    
 
     <!-- End Footer -->
 
@@ -310,7 +316,7 @@ require_once("db.php");
 
     <!-- <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a> -->
 
-    <button class="open-button is-size-5" onclick="openForm()" style="color:#6900FF !important;"><strong><i class="fas fa-comment-alt"></i> Chat</strong></button>
+    <!-- <button class="open-button is-size-5" onclick="openForm()" style="color:#6900FF !important;"><strong><i class="fas fa-comment-alt"></i> Chat</strong></button>
 
     <div class="chat-popup" id="myForm">
         <form class="form-container">
@@ -321,7 +327,7 @@ require_once("db.php");
         </form>
     </div>
 
-    </div>
+    </div> -->
 
     <!-- JS FILES -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -331,7 +337,7 @@ require_once("db.php");
     <style>
 
     </style>
-    <script>
+    <!-- <script>
         // ===== Scroll to Top ==== 
         $(window).scroll(function() {
             if ($(this).scrollTop() >= 50) { // If page is scrolled more than 50px
@@ -363,16 +369,19 @@ require_once("db.php");
                 scrollTop: $("#events").offset().top
             }, 1000);
         });
-    </script>
-    <script src="assets/js/main1.js"></script>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-    <script src="assets/js/counter.js"></script>
+    </script> -->
+    <!-- <script src="assets/js/main1.js"></script> -->
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
+    <!-- <script src="assets/js/counter.js"></script> -->
 
 
 
     <!-- tpo bot ends -->
 
+<?php
 
+    include 'components/footer.php';
+    ?>
 
 </body>
 

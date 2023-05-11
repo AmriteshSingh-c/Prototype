@@ -35,7 +35,8 @@ require_once("db.php");
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -61,12 +62,12 @@ require_once("db.php");
                 }
               </style>
               <h2 class="text-center">Active Drives</h2>
-              <div class="input-group input-group-lg">
+              <!-- <div class="input-group input-group-lg">
                 <input type="text" id="searchBar" class="form-control" placeholder="Search job">
                 <span class="input-group-btn">
                   <button id="searchBtn" type="button" class="btn btn-info btn-flat">Go!</button>
                 </span>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-1"></div>
           </div>
@@ -147,7 +148,7 @@ require_once("db.php");
       $("#pagination").twbsPagination({
         totalPages: <?php echo $total_pages; ?>,
         visible: 5,
-        onPageClick: function(e, page) {
+        onPageClick: function (e, page) {
           e.preventDefault();
           $("#target-content").html("loading....");
           $("#target-content").load("jobpagination.php?page=" + page);
@@ -157,13 +158,13 @@ require_once("db.php");
   </script>
 
   <script>
-    $(function() {
+    $(function () {
       Pagination();
     });
   </script>
 
   <script>
-    $("#searchBtn").on("click", function(e) {
+    $("#searchBtn").on("click", function (e) {
       e.preventDefault();
       var searchResult = $("#searchBar").val();
       var filter = "searchBar";
@@ -178,7 +179,7 @@ require_once("db.php");
   </script>
 
   <script>
-    $(".experienceSearch").on("click", function(e) {
+    $(".experienceSearch").on("click", function (e) {
       e.preventDefault();
       var searchResult = $(this).data("target");
       var filter = "experience";
@@ -193,7 +194,7 @@ require_once("db.php");
   </script>
 
   <script>
-    $(".citySearch").on("click", function(e) {
+    $(".citySearch").on("click", function (e) {
       e.preventDefault();
       var searchResult = $(this).data("target");
       var filter = "city";
@@ -212,7 +213,7 @@ require_once("db.php");
       $("#pagination").twbsPagination({
         totalPages: <?php echo $total_pages; ?>,
         visible: 5,
-        onPageClick: function(e, page) {
+        onPageClick: function (e, page) {
           e.preventDefault();
           val = encodeURIComponent(val);
           $("#target-content").html("loading....");

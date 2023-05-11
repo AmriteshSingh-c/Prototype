@@ -1,14 +1,14 @@
 <!-- Main header -->
 <header class="header">
     <nav class="navbar">
-        <a href="#" class="nav-logo">Placement Portal</a>
+        <a href="#" class="nav-logo">Training and Placement Cell</a>
         <ul class="nav-menu">
             <li class="nav-item">
                 <a href="index.php" class="nav-link">Home</a>
             </li>
 
             <li class="nav-item">
-                <a href="login.php" class="nav-link">Login</a>
+                <a href="student-login.php" class="nav-link">Login</a>
             </li>
 
 

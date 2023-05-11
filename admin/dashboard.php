@@ -37,7 +37,8 @@ require_once("../db.php");
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -66,7 +67,7 @@ require_once("../db.php");
                     <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Drives</a></li>
                     <li><a href="applications.php"><i class="fa fa-address-card-o"></i> Students Profile</a></li>
                     <!-- <li><a href="companies.php"><i class="fa fa-building"></i> Companies</a></li> -->
-                    <li><a href="companies.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
+                    <li><a href="coordinators.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
                 </div>
@@ -82,7 +83,7 @@ require_once("../db.php");
                     <div class="info-box-content">
                       <span class="info-box-text">Co-Ordinators</span>
                       <?php
-                      $sql = "SELECT * FROM company WHERE active='1'";
+                      $sql = "SELECT * FROM coordinator";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         $totalno = $result->num_rows;
@@ -90,7 +91,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -108,7 +111,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
 
                     </div>
                   </div>
@@ -127,7 +132,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -137,7 +144,7 @@ require_once("../db.php");
                     <div class="info-box-content">
                       <span class="info-box-text">Pending Students Confirmation</span>
                       <?php
-                      $sql = "SELECT * FROM users WHERE active='0'";
+                      $sql = "SELECT * FROM users WHERE active='2'";
                       $result = $conn->query($sql);
                       if ($result->num_rows > 0) {
                         $totalno = $result->num_rows;
@@ -145,7 +152,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -163,7 +172,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -181,7 +192,9 @@ require_once("../db.php");
                         $totalno = 0;
                       }
                       ?>
-                      <span class="info-box-number"><?php echo $totalno; ?></span>
+                      <span class="info-box-number">
+                        <?php echo $totalno; ?>
+                      </span>
                     </div>
                   </div>
                 </div>

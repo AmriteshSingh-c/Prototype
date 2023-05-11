@@ -16,7 +16,7 @@ $sql = "SELECT * FROM apply_job_post WHERE id_user='$_SESSION[id_user]' AND id_j
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
-  $sql1 = "SELECT * FROM job_post INNER JOIN company ON job_post.id_company=company.id_company WHERE id_jobpost='$_GET[id]'";
+  $sql1 = "SELECT * FROM job_post WHERE id_jobpost='$_GET[id]'";
   $result1 = $conn->query($sql1);
   if ($result1->num_rows > 0) {
     $row = $result1->fetch_assoc();
@@ -55,7 +55,8 @@ if ($result->num_rows > 0) {
   <![endif]-->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -77,14 +78,35 @@ if ($result->num_rows > 0) {
             <div class="col-md-2"></div>
             <div class="col-md-8 bg-white padding-2">
               <div class="pull-left">
-                <h2><b><?php echo $row['jobtitle']; ?></b></h2>
+                <h2><b>
+                    <?php echo $row['companyname']; ?>
+                  </b></h2>
               </div>
               <div class="pull-right">
-                <a href="index.php" class="btn btn-default btn-lg btn-flat margin-top-20"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                <a href="index.php" class="btn btn-default btn-lg btn-flat margin-top-20"><i
+                    class="fa fa-arrow-circle-left"></i> Back</a>
               </div>
               <div class="clearfix"></div>
               <hr>
-              <p><span class="margin-right-10"><i class="fa fa-location-arrow text-green"> Role: </i> <?php echo $row['experience']; ?> </span><span class="margin-right-10"> <i class="fa fa-money text-green"> CTC:</i> <?php echo "Rs " . $row['minimumsalary'] . "    "; ?></span> <span class="margin-right-10"><i class="fa fa-calendar text-green"> Drive Date:</i> <?php echo date("d-M-Y", strtotime($row['createdat'])); ?></span><span class="margin-right-10"><i class="fa fa-location-calendar text-green"> Eligibility: </i> <?php echo $row['maximumsalary'] . "%"; ?> </span></p>
+              <p>
+                <!-- <span class="margin-right-10"><i class="fa fa-location-arrow text-green"> Role: </i>
+                  <?php echo $row['experience']; ?>
+                </span> -->
+                <span class="margin-right-10"> <i class="fa fa-money text-green"> CTC:</i>
+                  <?php echo "Rs " . $row['ctc'] . "    "; ?>
+                </span> <span class="margin-right-10"><i class="fa fa-calendar text-green"> Drive Date:</i>
+                  <?php echo date("d-M-Y", strtotime($row['createdat'])); ?>
+                </span><span class="margin-right-10"><i class="fa fa-location-calendar text-green"> SSC Eligibility:
+                  </i>
+                  <?php echo $row['ssc_eligibility'] . "%"; ?>
+                </span>
+                <span class="margin-right-10"><i class="fa fa-location-calendar text-green"> HSC Eligibility: </i>
+                  <?php echo $row['hsc_eligibility'] . "%"; ?>
+                </span>
+                <span class="margin-right-10"><i class="fa fa-location-calendar text-green">UG Eligibility: </i>
+                  <?php echo $row['ug_eligibility'] . "%"; ?>
+                </span>
+              </p>
               <div>
                 <?php echo stripcslashes($row['description']); ?>
               </div>

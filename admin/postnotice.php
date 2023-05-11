@@ -20,28 +20,28 @@ if (isset($_POST['submit'])) {
 
 
     //Folder where you want to save your resume. THIS FOLDER MUST BE CREATED BEFORE TRYING
-    $folder_dir = "../uploads/resume/";
+    $folder_dir = "../uploads/noticefile/";
 
     //Getting Basename of file. So if your file location is Documents/New Folder/myResume.pdf then base name will return myResume.pdf
-    $base = basename($_FILES['resume']['name']);
+    $base = basename($_FILES['file']['name']);
 
     //This will get us extension of your file. So myResume.pdf will return pdf. If it was resume.doc then this will return doc.
-    $resumeFileType = pathinfo($base, PATHINFO_EXTENSION);
+    $noticeFileType = pathinfo($base, PATHINFO_EXTENSION);
 
     //Setting a random non repeatable file name. Uniqid will create a unique name based on current timestamp. We are using this because no two files can be of same name as it will overwrite.
-    $file = uniqid() . "." . $resumeFileType;
+    $file = uniqid() . "." . $noticeFileType;
 
     //This is where your files will be saved so in this case it will be uploads/resume/newfilename
     $filename = $folder_dir . $file;
 
     //We check if file is saved to our temp location or not.
-    if (file_exists($_FILES['resume']['tmp_name'])) {
+    if (file_exists($_FILES['file']['tmp_name'])) {
 
 
 
 
         move_uploaded_file(
-            $_FILES["resume"]["tmp_name"],
+            $_FILES["file"]["tmp_name"],
             $filename
         );
     }
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 
 
 
-    $sql = "INSERT INTO notice(subject,notice,audience,resume, hash,`date`) VALUES ('$subject','$notice','$audience','$file', '$hash',now())";
+    $sql = "INSERT INTO notice(subject,notice,audience,noticefile, hash,`date`) VALUES ('$subject','$notice','$audience','$file', '$hash',now())";
 
     if ($conn->query($sql) === TRUE) {
         include 'sendmail.php';
@@ -91,7 +91,8 @@ if (isset($_POST['submit'])) {
 
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -134,12 +135,14 @@ if (isset($_POST['submit'])) {
 
                     <br>
                     <div class="form-group mt-3">
-                        <textarea style="top:80px " type="input" class="input" name="input" id="input" placeholder="Notice" required></textarea>
+                        <textarea style="top:80px " type="input" class="input" name="input" id="input"
+                            placeholder="Notice" required></textarea>
                     </div>
 
                     <div class="form-group text-center option">
                         <label>Audience </label>
-                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%" tabindex="-1" aria-hidden="true" class="input" name="audience">
+                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%" tabindex="-1"
+                            aria-hidden="true" class="input" name="audience">
 
                             <option class="option" value="All Students">All Students</option>
                             <option class="option" value="Co-ordinators">Co-ordinators</option>
@@ -203,24 +206,35 @@ if (isset($_POST['submit'])) {
 
                                 // output data of each row
                                 while ($row = $result->fetch_assoc()) {
-                            ?>
-                                    <td><?php echo $row['subject']; ?></td>
-                                    <td><?php echo $row['notice']; ?></td>
-                                    <td><?php echo $row['audience']; ?></td>
+                                    ?>
+                                    <td>
+                                        <?php echo $row['subject']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['notice']; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $row['audience']; ?>
+                                    </td>
                                     <?php if ($row['resume'] != '') { ?>
-                                        <td><a href="../uploads/resume/<?php echo $row['resume']; ?>" download="<?php echo 'Notice'; ?>"><i class="fa fa-file"></i></a></td>
+                                        <td><a href="../uploads/resume/<?php echo $row['resume']; ?>"
+                                                download="<?php echo 'Notice'; ?>"><i class="fa fa-file"></i></a></td>
                                     <?php } else { ?>
                                         <td>No Resume Uploaded</td>
                                     <?php } ?>
-                                    <td><?php echo $row['date']; ?></td>
+                                    <td>
+                                        <?php echo $row['date']; ?>
+                                    </td>
 
-                                    <td><a id="delete" href="deletenotice.php?id=<?php echo $row['id']; ?>"><i class="fa fa-trash"></i></a></td>
-                                    </tr><?php
+                                    <td><a id="delete" href="deletenotice.php?id=<?php echo $row['id']; ?>"><i
+                                                class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <?php
 
-                                        }
-                                    }
+                                }
+                            }
 
-                                            ?>
+                            ?>
 
 
                         </tbody>

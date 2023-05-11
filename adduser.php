@@ -15,17 +15,21 @@ if (isset($_POST)) {
 	$address = mysqli_real_escape_string($conn, $_POST['address']);
 	$city = mysqli_real_escape_string($conn, $_POST['city']);
 	$state = mysqli_real_escape_string($conn, $_POST['state']);
+	$country = mysqli_real_escape_string($conn, $_POST['country']);
 	$contactno = mysqli_real_escape_string($conn, $_POST['contactno']);
-	$qualification = mysqli_real_escape_string($conn, $_POST['qualification']);
+	// $qualification = mysqli_real_escape_string($conn, $_POST['qualification']);
 	$stream = mysqli_real_escape_string($conn, $_POST['stream']);
 	$passingyear = mysqli_real_escape_string($conn, $_POST['passingyear']);
 	$dob = mysqli_real_escape_string($conn, $_POST['dob']);
 	$age = mysqli_real_escape_string($conn, $_POST['age']);
-	$designation = mysqli_real_escape_string($conn, $_POST['designation']);
-	$aboutme = mysqli_real_escape_string($conn, $_POST['aboutme']);
-	$skills = mysqli_real_escape_string($conn, $_POST['skills']);
+	// $designation = mysqli_real_escape_string($conn, $_POST['designation']);
+	// $aboutme = mysqli_real_escape_string($conn, $_POST['aboutme']);
+	// $skills = mysqli_real_escape_string($conn, $_POST['skills']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$hsc = mysqli_real_escape_string($conn, $_POST['hsc']);
+	$ssc = mysqli_real_escape_string($conn, $_POST['ssc']);
+	$ug = mysqli_real_escape_string($conn, $_POST['ug']);
 	//Encrypt Password
 	$password = base64_encode(strrev(md5($password)));
 
@@ -83,7 +87,7 @@ if (isset($_POST)) {
 
 		//If there is any error then redirect back.
 		if ($uploadOk == false) {
-			header("Location: register-candidates.php");
+			header("Location: student-register.php");
 			exit();
 		}
 
@@ -91,7 +95,7 @@ if (isset($_POST)) {
 
 
 		//sql new registration insert query
-		$sql = "INSERT INTO users(firstname, lastname, email, password, address, city, state, contactno, qualification, stream, passingyear, dob, age, designation, resume, hash, aboutme, skills) VALUES ('$firstname', '$lastname', '$email', '$password', '$address', '$city', '$state', '$contactno', '$qualification', '$stream', '$passingyear', '$dob', '$age', '$designation', '$file', '$hash', '$aboutme', '$skills')";
+		$sql = "INSERT INTO users(firstname, lastname, email, password, address,country, city, state, contactno,  stream, passingyear, dob, age,  resume, hash,hsc,ssc,ug) VALUES ('$firstname', '$lastname', '$email', '$password', '$address', '$country','$city', '$state', '$contactno', '$stream', '$passingyear', '$dob', '$age', '$file', '$hash','$hsc','$ssc','$ug' )";
 
 		if ($conn->query($sql) === TRUE) {
 			// Send Email
@@ -131,7 +135,7 @@ if (isset($_POST)) {
 
 			// //If data inserted successfully then Set some session variables for easy reference and redirect to login
 			$_SESSION['registerCompleted'] = true;
-			header("Location: login-candidates.php");
+			header("Location: student-login.php");
 			exit();
 		} else {
 			//If data failed to insert then show that error. Note: This condition should not come unless we as a developer make mistake or someone tries to hack their way in and mess up :D
@@ -140,7 +144,7 @@ if (isset($_POST)) {
 	} else {
 		//if email found in database then show email already exists error.
 		$_SESSION['registerError'] = true;
-		header("Location: register-candidates.php");
+		header("Location: student-register.php");
 		exit();
 	}
 
@@ -148,6 +152,6 @@ if (isset($_POST)) {
 	$conn->close();
 } else {
 	//redirect them back to register page if they didn't click register button
-	header("Location: register-candidates.php");
+	header("Location: student-register.php");
 	exit();
 }

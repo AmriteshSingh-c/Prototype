@@ -20,6 +20,8 @@ require_once("../db.php");
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Tailwind -->
+  <!-- <link href="../output.css" rel="stylesheet"> -->
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -29,17 +31,18 @@ require_once("../db.php");
   <!-- Theme style -->
   <link rel="stylesheet" href="../css/AdminLTE.min.css">
   <link rel="stylesheet" href="../css/_all-skins.min.css">
-  <!-- Custom -->
+  <!-- Custom  -->
   <link rel="stylesheet" href="../css/custom.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
+  <!-- [if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <![endif] -->
 
   <!-- Google Font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -66,9 +69,10 @@ require_once("../db.php");
                   <ul class="nav nav-pills nav-stacked">
                     <li><a href="dashboard.php"><i class="fa fa-dashboard"></i> Dashboard</a></li>
                     <li><a href="active-jobs.php"><i class="fa fa-briefcase"></i> Active Drives</a></li>
-                    <li class="active"><a href="applications.php"><i class="fa fa-address-card-o"></i> Students Profile</a></li>
+                    <li class="active"><a href="applications.php"><i class="fa fa-address-card-o"></i> Students
+                        Profile</a></li>
                     <!-- <li><a href="companies.php"><i class="fa fa-building"></i> Drives</a></li> -->
-                    <li><a href="companies.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
+                    <li><a href="coordinators.php"><i class="fa fa-arrow-circle-o-right"></i> Co - Ordinators</a></li>
                     <li><a href="../logout.php"><i class="fa fa-arrow-circle-o-right"></i> Logout</a></li>
                   </ul>
                 </div>
@@ -83,8 +87,8 @@ require_once("../db.php");
                     <table id="example2" class="table table-hover">
                       <thead>
                         <th>Candidate</th>
-                        <th>Highest Qualification</th>
-                        <th>Skills</th>
+
+
                         <th>City</th>
                         <th>State</th>
                         <th>Download Resume</th>
@@ -99,23 +103,24 @@ require_once("../db.php");
                         if ($result->num_rows > 0) {
                           while ($row = $result->fetch_assoc()) {
 
-                            $skills = $row['skills'];
-                            $skills = explode(',', $skills);
-                        ?>
+
+                            ?>
                             <tr>
-                              <td><?php echo $row['firstname'] . ' ' . $row['lastname']; ?></td>
-                              <td><?php echo $row['qualification']; ?></td>
                               <td>
-                                <?php
-                                foreach ($skills as $value) {
-                                  echo ' <span class="label label-success">' . $value . '</span>';
-                                }
-                                ?>
+                                <?php echo $row['firstname'] . ' ' . $row['lastname']; ?>
                               </td>
-                              <td><?php echo $row['city']; ?></td>
-                              <td><?php echo $row['state']; ?></td>
+
+
+                              <td>
+                                <?php echo $row['city']; ?>
+                              </td>
+                              <td>
+                                <?php echo $row['state']; ?>
+                              </td>
                               <?php if ($row['resume'] != '') { ?>
-                                <td><a href="../uploads/resume/<?php echo $row['resume']; ?>" download="<?php echo $row['firstname'] . ' Resume'; ?>"><i class="fa fa-file-pdf-o"></i></a></td>
+                                <td><a href="../uploads/resume/<?php echo $row['resume']; ?>"
+                                    download="<?php echo $row['firstname'] . ' Resume'; ?>"><i
+                                      class="fa fa-file-pdf-o"></i></a></td>
                               <?php } else { ?>
                                 <td>No Resume Uploaded</td>
                               <?php } ?>
@@ -124,13 +129,14 @@ require_once("../db.php");
                                 if ($row['active'] == '1') {
                                   echo "Activated";
                                 } else if ($row['active'] == '2') {
-                                ?>
-                                  <a href="reject-student.php?id=<?php echo $row['id_user']; ?>">Reject</a> <a href="approve-student.php?id=<?php echo $row['id_user']; ?>">Approve</a>
-                                <?php
+                                  ?>
+                                    <a href="reject-student.php?id=<?php echo $row['id_user']; ?>">Reject</a> <a
+                                      href="approve-student.php?id=<?php echo $row['id_user']; ?>">Approve</a>
+                                  <?php
                                 } else if ($row['active'] == '3') {
-                                ?>
-                                  <a href="approve-student.php?id=<?php echo $row['id_user']; ?>">Reactivate</a>
-                                <?php
+                                  ?>
+                                      <a href="approve-student.php?id=<?php echo $row['id_user']; ?>">Reactivate</a>
+                                  <?php
                                 } else if ($row['active'] == '0') {
                                   echo "Rejected";
                                 }
@@ -140,7 +146,7 @@ require_once("../db.php");
                               <td><a href="delete-student.php?id=<?php echo $row['id_user']; ?>">Delete</a></td>
                             </tr>
 
-                        <?php
+                            <?php
 
                           }
                         }
@@ -225,7 +231,7 @@ require_once("../db.php");
   <script src="../js/adminlte.min.js"></script>
 
   <script>
-    $(function() {
+    $(function () {
       $('#example2').DataTable({
         'paging': true,
         'lengthChange': false,
